@@ -32,3 +32,13 @@ public:
     bool is_pressed(int mouse_x, int mouse_y);
     void render();
 };
+
+class Menu {
+private:
+    vector<Button*> buttons;
+public:
+    Menu() {}
+    Menu();
+    std::string get_pressed_button();
+    void render();
+}
