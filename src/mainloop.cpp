@@ -26,6 +26,7 @@ void MainLoop::render_game() {
     switch (game_state)
     {
         case STARTING_SCREEN:
+            bg.render_menu();
             play_button->render();
             title->render_text_box();
             break;
@@ -36,15 +37,18 @@ void MainLoop::render_game() {
         case PAUSING:
             map.render(camera);
             cat.render(camera, frame);
+            bg.render_menu();
             resume_button->render();
             break;
         case GAME_OVER:
             you_lost->render_text_box();
+            bg.render_menu();
             quit_button->render();
             restart_button->render();
             break;
         case WIN:
             you_won->render_text_box();
+            bg.render_menu();
             quit_button->render();
             restart_button->render();
             break;
