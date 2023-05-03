@@ -15,6 +15,7 @@ public:
     void update_text(std::string new_text);
     void load_text_texture();
     void render_text_box();
+    SDL_Rect get_rect() {return text_rect;};
     std::string get_text() {return text_string;};
     SDL_Color get_color() {return text_color;};
 };
@@ -22,7 +23,7 @@ public:
 class Button {
 private:
     Textbox* button_textbox;
-    SDL_Rect button_rect;
+    SDL_Rect src_rect, button_rect;
     std::string button_name;
     LTexture button_texture;
 public:
@@ -33,12 +34,12 @@ public:
     void render();
 };
 
-class Menu {
-private:
-    vector<Button*> buttons;
-public:
-    Menu() {}
-    Menu();
-    std::string get_pressed_button();
-    void render();
-}
+// class Menu {
+// private:
+//     vector<Button*> buttons;
+// public:
+//     Menu() {}
+//     Menu();
+//     std::string get_pressed_button();
+//     void render();
+// }

@@ -2,7 +2,11 @@
 #include <iostream>
 #include <cmath>
 Player::Player() {
-    mVelX = PLAYER_VEL;
+    init();
+}
+
+void Player::init() {
+        mVelX = PLAYER_VEL;
     mVelY = 0;
 
     player_state = IDLE;

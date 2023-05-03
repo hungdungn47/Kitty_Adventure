@@ -14,7 +14,7 @@ Mix_Chunk* eatable_sound = NULL;
 bool LoadMusic()
 {
 	bool success = true;
-	background_music = Mix_LoadMUS("res/sounds/XuanThi-HaAnhTuan.mp3");
+	background_music = Mix_LoadMUS("res/sounds/dat-nuoc-tron-niem-vui-nsut-ta-minh-tam.mp3");
 	if (background_music == NULL)
 	{
 		cerr << "Failed to load background music! SDL_mixer Error: %s\n" << Mix_GetError();

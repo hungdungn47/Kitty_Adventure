@@ -23,7 +23,8 @@ enum GameState {
     QUITTING_THE_GAME,
     WIN,
     GAME_OVER,
-    PAUSING
+    PAUSING,
+    RESTARTING
 };
 
 const static char WINDOW_TITLE[] = "Geometry dumb";

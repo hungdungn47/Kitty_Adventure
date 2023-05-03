@@ -32,6 +32,8 @@ public:
     Player();
     ~Player();
 
+    void init();
+
     void handleEvent(SDL_Event& e);
 
     void move(vector<Tile*> tiles, Map level);

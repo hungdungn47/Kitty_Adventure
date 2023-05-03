@@ -38,8 +38,8 @@ Button::Button(std::string _button_name, SDL_Rect _button_rect) {
     button_name = _button_name;
     button_rect = _button_rect;
 
-    //The text rect is smaller than the button rect so that the text is inside the button
-    SDL_Rect text_rect = {button_rect.x + 10, button_rect.y + 10, button_rect.w - 20, button_rect.h - 20};
+    //The text rect is a bit smaller than the button rect so that the text is inside the button
+    SDL_Rect text_rect = {button_rect.x + 20, button_rect.y + 20, button_rect.w - 40, button_rect.h - 40};
     button_textbox = new Textbox(WHITE_COLOR, button_name, text_rect, 25, "res/fonts/Southern.ttf");
     load_texture();
 }
@@ -51,10 +51,12 @@ bool Button::is_pressed(int mouse_x, int mouse_y) {
 
 void Button::load_texture() {
     button_texture.loadFromFile(gRenderer, "res/images/button_0.png");
-    std::cout << "Button texture loaded" << std::endl;
+    //std::cout << "Button texture loaded" << std::endl;
 }
 
 void Button::render() {
     button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
+    SDL_SetRenderDrawColor(gRenderer, 255, 0, 0, 255);
+    SDL_RenderDrawRect(gRenderer, &button_rect);
     button_textbox->render_text_box();
 }
