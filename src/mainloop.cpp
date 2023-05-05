@@ -11,10 +11,10 @@ MainLoop::MainLoop() {
     you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
     you_lost = new Textbox(WHITE_COLOR, "You lost bro", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
 
-    play_button = new Button("play", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 50, 200, 100});
-    quit_button = new Button("quit", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 100, 200, 100});
-    resume_button = new Button("resume", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 50, 200, 100});
-    restart_button = new Button("restart", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 100, 200, 100});
+    play_button = new Button("Play", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 50, 200, 100});
+    quit_button = new Button("Quit", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
+    resume_button = new Button("Resume", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 50, 200, 100});
+    restart_button = new Button("Replay", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
 
     if(!LoadMusic()) {
         std::cout << "Failed to load music" << std::endl;

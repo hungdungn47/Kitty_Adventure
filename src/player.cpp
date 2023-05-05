@@ -6,7 +6,7 @@ Player::Player() {
 }
 
 void Player::init() {
-        mVelX = PLAYER_VEL;
+    mVelX = PLAYER_VEL;
     mVelY = 0;
 
     player_state = IDLE;
@@ -17,8 +17,8 @@ void Player::init() {
     //load media
     mTexture.loadFromFile(gRenderer, "res/Cat Sprite Sheet.png");
     
-    //Initialize destination rect
-    mBox = {0, 240, PLAYER_WIDTH, PLAYER_HEIGHT};
+    //Initialize player box
+    mBox = {80 * 5, 80 * 5, PLAYER_WIDTH, PLAYER_HEIGHT};
     
     //Initialize sprite clips
     for(int i = 0; i < IDLE_ANIMATION_FRAMES; i++) {
@@ -28,9 +28,6 @@ void Player::init() {
     for(int i = 0; i < RUNNING_ANIMATION_FRAMES; i++) {
         running_sprite_clips[i] = {7 + 32 * i, 19 + 32 * 4, 16, 13};
     }
-
-    std::cout << "PLAYER_WIDTH: " << PLAYER_WIDTH << std::endl;
-    std::cout << "PLAYER_HEIGHT: " << PLAYER_HEIGHT << std::endl;
 }
 
 Player::~Player() {
@@ -67,25 +64,20 @@ void Player::move(vector<Tile*> tiles, Map level) {
     mVelY += acceleration;
 
     mBox.x += mVelX;
-    if(mBox.x < 0 || touchesWall(mBox, tiles)) {
+    if(touchesWall(mBox, tiles)) {
         mBox.x -= mVelX;
     }
 
     mBox.y += mVelY;
 
-    if(mBox.y < 0) {
-        mBox.y = 0;
-        mVelY = 0;
-    }
-    if(mBox.y + PLAYER_HEIGHT > level.LEVEL_HEIGHT) {
-        mBox.y = level.LEVEL_HEIGHT - PLAYER_HEIGHT;
-        mVelY = 0;
-    }
+    // if(mBox.y + PLAYER_HEIGHT > level.LEVEL_HEIGHT) {
+    //     mBox.y = level.LEVEL_HEIGHT - PLAYER_HEIGHT;
+    //     mVelY = 0;
+    // }
     if(touchesWall(mBox, tiles)) {
         mBox.y -= mVelY;
         mVelY = 0;
     }
-
 }
 
 bool Player::win(Map level) {
@@ -97,7 +89,7 @@ void Player::setCamera(SDL_Rect& camera, Map level) {
     // camera.x = ( mBox.x + PLAYER_WIDTH / 2 ) - SCREEN_WIDTH / 2;
     // camera.y = ( mBox.y + PLAYER_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
     if(mBox.x + PLAYER_WIDTH > camera.x + SCREEN_WIDTH) camera.x += PLAYER_VEL;
-    else camera.x += PLAYER_VEL - 5;
+    else camera.x += PLAYER_VEL - 2;
     //Keep the camera in bounds
     if( camera.x < 0 )
     { 
@@ -115,7 +107,6 @@ void Player::setCamera(SDL_Rect& camera, Map level) {
     {
         camera.y = level.LEVEL_HEIGHT - camera.h;
     }
-
 }
 
 void Player::render(SDL_Rect& camera, int& frame) {
