@@ -2,7 +2,7 @@
 #include "SDL_mixer_functions.hpp"
 
 MainLoop::MainLoop() { 
-    map = Map(1);
+    map = Map(2);
     game_state = STARTING_SCREEN;
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     frame = 0;

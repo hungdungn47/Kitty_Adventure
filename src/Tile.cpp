@@ -60,7 +60,15 @@ bool touchesWall( SDL_Rect box, vector<Tile*> tiles )
 
 Map::Map(int _level) {
     level = _level;
-    set_tiles("res/Tile_map/Level_2.csv");
+    switch(level) {
+        case 1:
+            set_tiles("res/Tile_map/Mossy_level.csv");
+            break;
+        case 2:
+            set_tiles("res/Tile_map/Level_2.csv");
+            break;
+        default: break;
+    }
 }
 
 bool Map::set_tiles(std::string file_path) {
