@@ -1,4 +1,5 @@
 #include "menu.hpp"
+#include "SDL_mixer_functions.hpp"
 #include <iostream>
 
 Textbox::Textbox(SDL_Color _text_color, std::string _text_string, SDL_Rect _text_rect, int font_size, std::string _font_path)
@@ -41,22 +42,23 @@ Button::Button(std::string _button_name, SDL_Rect _button_rect) {
     //The text rect is a bit smaller than the button rect so that the text is inside the button
     SDL_Rect text_rect = {button_rect.x + 20, button_rect.y + 20, button_rect.w - 40, button_rect.h - 40};
     button_textbox = new Textbox(WHITE_COLOR, button_name, text_rect, 25, "res/fonts/Southern.ttf");
-    load_texture();
+    load_texture(); 
 }
 
 bool Button::is_pressed(int mouse_x, int mouse_y) {
-    return mouse_x >= button_rect.x && mouse_x <= button_rect.x + button_rect.w
-        && mouse_y >= button_rect.y && mouse_y <= button_rect.y + button_rect.h;
+    if(mouse_x >= button_rect.x && mouse_x <= button_rect.x + button_rect.w
+        && mouse_y >= button_rect.y && mouse_y <= button_rect.y + button_rect.h) {
+            Mix_PlayChannel(-1, button_select_sound, 0);
+            return true;
+        }
+    return false;
 }
 
 void Button::load_texture() {
     button_texture.loadFromFile(gRenderer, "res/images/button_0.png");
-    //std::cout << "Button texture loaded" << std::endl;
 }
 
 void Button::render() {
     button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
-    SDL_SetRenderDrawColor(gRenderer, 255, 0, 0, 255);
-    SDL_RenderDrawRect(gRenderer, &button_rect);
     button_textbox->render_text_box();
 }

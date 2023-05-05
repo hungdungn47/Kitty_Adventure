@@ -25,7 +25,8 @@ enum GameState {
     GAME_OVER,
     PAUSING,
     RESTARTING,
-    CHOOSING_LEVEL
+    CHOOSING_LEVEL,
+    CHOOSING_SOUND_TRACK
 };
 
 const static char WINDOW_TITLE[] = "Geometry dumb";

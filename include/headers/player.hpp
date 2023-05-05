@@ -52,7 +52,7 @@ public:
     int getPosY();
 
 private:
-    //Hit box
+    //Player's hit box
     SDL_Rect mBox;
 
     //Source rectangle for creating animation

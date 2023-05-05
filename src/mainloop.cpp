@@ -2,7 +2,6 @@
 #include "SDL_mixer_functions.hpp"
 
 MainLoop::MainLoop() { 
-    background_music = giai_dieu_to_quoc;
     level1 = Map(1);
     level2 = Map(2);
     game_state = STARTING_SCREEN;
@@ -11,16 +10,22 @@ MainLoop::MainLoop() {
 
     title = new Textbox(WHITE_COLOR, "KITTY'S ADVENTURE", {SCREEN_WIDTH / 2 - 200, 50, 400, 100}, 100, "res/fonts/Pacifico.ttf");
     you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
-    you_lost = new Textbox(WHITE_COLOR, "You lost bro", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
+    you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
+    choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
 
-    play_button = new Button("Play", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 50, 200, 100});
+    play_button = new Button("Play", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
+    option_button = new Button("Option", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
     resume_button = new Button("Resume", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 50, 200, 100});
     
     quit_button = new Button("Quit", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
-    restart_button = new Button("Replay", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
+    restart_button = new Button("Menu", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
 
     level1_button = new Button("Level 1", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
     level2_button = new Button("Level 2", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
+
+    giai_dieu_to_quoc_button = new Button("Giai dieu To quoc", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 150, 400, 100});
+    hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2, 400, 100});
+    dat_nuoc_tron_niem_vui_button = new Button("Dat nuoc tron niem vui", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 + 150, 400, 100});
 
     if(!LoadMusic()) {
         std::cout << "Failed to load music" << std::endl;
@@ -34,6 +39,7 @@ void MainLoop::render_game() {
         case STARTING_SCREEN:
             bg.render_menu();
             play_button->render();
+            option_button->render();
             title->render_text_box();
             break;
         case CHOOSING_LEVEL:
@@ -64,6 +70,12 @@ void MainLoop::render_game() {
             quit_button->render();
             restart_button->render();
             break;
+        case CHOOSING_SOUND_TRACK:
+            choose_sound_track->render_text_box();
+            giai_dieu_to_quoc_button->render();
+            hanh_khuc_ngay_va_dem_button->render();
+            dat_nuoc_tron_niem_vui_button->render();
+            break;
         default:
             break;
     }
@@ -81,7 +93,10 @@ void MainLoop::handle_event(SDL_Event e) {
                     SDL_GetMouseState(&x, &y);
                     if(play_button->is_pressed(x, y)) {
                         update_game_state(CHOOSING_LEVEL);
-                    };
+                    }
+                    if(option_button->is_pressed(x, y)) {
+                        update_game_state(CHOOSING_SOUND_TRACK);
+                    }
                 }
                 break;
             case CHOOSING_LEVEL:
@@ -90,14 +105,12 @@ void MainLoop::handle_event(SDL_Event e) {
                     SDL_GetMouseState(&x, &y);
                     if(level1_button->is_pressed(x, y)) {
                         map = level1;
-                        update_game_state(PLAYING_THE_GAME);                        
-                        Mix_PlayChannel(-1, button_select_sound, 0);
-                        Mix_PlayMusic(giai_dieu_to_quoc, -1);
+                        update_game_state(PLAYING_THE_GAME);              
+                        Mix_PlayMusic(background_music, -1);
                     } else if(level2_button->is_pressed(x, y)) {
                         map = level2;
                         update_game_state(PLAYING_THE_GAME);
-                        Mix_PlayChannel(-1, button_select_sound, 0);
-                        Mix_PlayMusic(giai_dieu_to_quoc, -1);
+                        Mix_PlayMusic(background_music, -1);
                     }
                 }
                 break;
@@ -120,11 +133,9 @@ void MainLoop::handle_event(SDL_Event e) {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
                     if(quit_button->is_pressed(x, y)) {
-                        Mix_PlayChannel(-1, button_select_sound, 0);
                         update_game_state(QUITTING_THE_GAME);
                     }
                     if(restart_button->is_pressed(x, y)) {
-                        Mix_PlayChannel(-1, button_select_sound, 0);
                         update_game_state(RESTARTING);
                     }
                 }
@@ -136,7 +147,6 @@ void MainLoop::handle_event(SDL_Event e) {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
                     if(resume_button->is_pressed(x, y)) {
-                        Mix_PlayChannel(-1, button_select_sound, 0);
                         update_game_state(PLAYING_THE_GAME);
                     }
                 }
@@ -147,12 +157,28 @@ void MainLoop::handle_event(SDL_Event e) {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
                     if(quit_button->is_pressed(x, y)) {
-                        Mix_PlayChannel(-1, button_select_sound, 0);
                         update_game_state(QUITTING_THE_GAME);
                     }
                     if(restart_button->is_pressed(x, y)) {
-                        Mix_PlayChannel(-1, button_select_sound, 0);
                         update_game_state(RESTARTING);
+                    }
+                }
+                break;
+            case CHOOSING_SOUND_TRACK:
+                if(e.type == SDL_MOUSEBUTTONDOWN) {
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+                    if(giai_dieu_to_quoc_button->is_pressed(x, y)) {
+                        background_music = giai_dieu_to_quoc;
+                        update_game_state(STARTING_SCREEN);
+                    }
+                    if(hanh_khuc_ngay_va_dem_button->is_pressed(x, y)) {
+                        background_music = hanh_khuc_ngay_va_dem;
+                        update_game_state(STARTING_SCREEN);
+                    }
+                    if(dat_nuoc_tron_niem_vui_button->is_pressed(x, y)) {
+                        background_music = dat_nuoc_tron_niem_vui;
+                        update_game_state(STARTING_SCREEN);
                     }
                 }
                 break;
@@ -170,8 +196,7 @@ void MainLoop::handle_event(SDL_Event e) {
         std::cout << "Restarting" << std::endl;
         camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
         cat.init();
-        Mix_PlayMusic(giai_dieu_to_quoc, -1);
-        update_game_state(PLAYING_THE_GAME);
+        update_game_state(STARTING_SCREEN);
     }
 }
 
