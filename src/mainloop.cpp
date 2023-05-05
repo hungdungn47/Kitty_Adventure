@@ -16,7 +16,7 @@ MainLoop::MainLoop() {
     quit_button = new Button("Quit", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
     restart_button = new Button("Replay", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
 
-    level1_button = new Button("Level 1", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 -130, 200, 100});
+    level1_button = new Button("Level 1", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
     level2_button = new Button("Level 2", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
 
     if(!LoadMusic()) {
