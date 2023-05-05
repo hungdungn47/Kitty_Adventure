@@ -18,7 +18,7 @@ void Player::init() {
     mTexture.loadFromFile(gRenderer, "res/Cat Sprite Sheet.png");
     
     //Initialize player box
-    mBox = {80 * 5, 80 * 5, PLAYER_WIDTH, PLAYER_HEIGHT};
+    mBox = {80 * 5, 80 * 4, PLAYER_WIDTH, PLAYER_HEIGHT};
     
     //Initialize sprite clips
     for(int i = 0; i < IDLE_ANIMATION_FRAMES; i++) {

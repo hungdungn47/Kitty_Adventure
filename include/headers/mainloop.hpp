@@ -9,7 +9,7 @@
 
 class MainLoop {
 private:
-    Button *play_button, *pause_button, *quit_button, *resume_button, *restart_button;
+    Button *play_button, *pause_button, *quit_button, *resume_button, *restart_button, *level1_button, *level2_button;
     Textbox *title, *you_won, *you_lost;
     Background bg;
     Player cat;
