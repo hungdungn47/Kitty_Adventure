@@ -2,6 +2,9 @@
 #include "SDL_mixer_functions.hpp"
 
 MainLoop::MainLoop() { 
+    background_music = giai_dieu_to_quoc;
+    level1 = Map(1);
+    level2 = Map(2);
     game_state = STARTING_SCREEN;
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     frame = 0;
@@ -86,15 +89,15 @@ void MainLoop::handle_event(SDL_Event e) {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
                     if(level1_button->is_pressed(x, y)) {
-                        map = Map(1);
+                        map = level1;
                         update_game_state(PLAYING_THE_GAME);                        
                         Mix_PlayChannel(-1, button_select_sound, 0);
-                        Mix_PlayMusic(background_music, -1);
+                        Mix_PlayMusic(giai_dieu_to_quoc, -1);
                     } else if(level2_button->is_pressed(x, y)) {
-                        map = Map(2);
+                        map = level2;
                         update_game_state(PLAYING_THE_GAME);
                         Mix_PlayChannel(-1, button_select_sound, 0);
-                        Mix_PlayMusic(background_music, -1);
+                        Mix_PlayMusic(giai_dieu_to_quoc, -1);
                     }
                 }
                 break;
@@ -167,7 +170,7 @@ void MainLoop::handle_event(SDL_Event e) {
         std::cout << "Restarting" << std::endl;
         camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
         cat.init();
-        Mix_PlayMusic(background_music, -1);
+        Mix_PlayMusic(giai_dieu_to_quoc, -1);
         update_game_state(PLAYING_THE_GAME);
     }
 }

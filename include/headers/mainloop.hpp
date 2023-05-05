@@ -13,7 +13,7 @@ private:
     Textbox *title, *you_won, *you_lost;
     Background bg;
     Player cat;
-    Map map;
+    Map map, level1, level2;
     SDL_Rect camera;
     int frame;
 

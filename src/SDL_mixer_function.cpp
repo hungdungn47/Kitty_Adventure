@@ -17,18 +17,6 @@ Mix_Chunk* eatable_sound = NULL;
 bool LoadMusic()
 {
 	bool success = true;
-	background_music = Mix_LoadMUS("res/sounds/dat-nuoc-tron-niem-vui-nsut-ta-minh-tam.mp3");
-	if (background_music == NULL)
-	{
-		cout << "Failed to load background music! SDL_mixer Error: " << Mix_GetError() << endl;
-		success = false;
-	}
-	button_select_sound = Mix_LoadWAV("res/sounds/button_pressed.wav");
-	if (background_music == NULL)
-	{
-		cout << "Failed to load button select sound! SDL_mixer Error: " << Mix_GetError() << endl;
-		success = false;
-	}
 	dat_nuoc_tron_niem_vui = Mix_LoadMUS("res/sounds/dat-nuoc-tron-niem-vui-nsut-ta-minh-tam.mp3");
 	if(dat_nuoc_tron_niem_vui == NULL) {
 		cout << "Failed to load Dat nuoc tron niem vui. " << Mix_GetError() << endl;
@@ -42,6 +30,12 @@ bool LoadMusic()
 	giai_dieu_to_quoc = Mix_LoadMUS("res/sounds/GiaiDieuToQuoc_TrongTan.mp3");
 	if(giai_dieu_to_quoc == NULL) {
 		cout << "Failed to load Giai dieu to quoc. " << Mix_GetError() << endl;
+		success = false;
+	}
+	button_select_sound = Mix_LoadWAV("res/sounds/button_pressed.wav");
+	if (button_select_sound == NULL)
+	{
+		cout << "Failed to load button select sound! SDL_mixer Error: " << Mix_GetError() << endl;
 		success = false;
 	}
 	return success;
