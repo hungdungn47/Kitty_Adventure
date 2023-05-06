@@ -15,7 +15,9 @@ MainLoop::MainLoop() {
 
     play_button = new Button("Play", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
     option_button = new Button("Option", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
-    resume_button = new Button("Resume", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 50, 200, 100});
+
+    resume_button = new Button("Resume", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
+    menu_button = new Button("Menu", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
     
     quit_button = new Button("Quit", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
     restart_button = new Button("Menu", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
@@ -57,6 +59,7 @@ void MainLoop::render_game() {
             cat.render(camera, frame);
             bg.render_menu();
             resume_button->render();
+            menu_button->render();
             break;
         case GAME_OVER:
             you_lost->render_text_box();
@@ -148,6 +151,9 @@ void MainLoop::handle_event(SDL_Event e) {
                     SDL_GetMouseState(&x, &y);
                     if(resume_button->is_pressed(x, y)) {
                         update_game_state(PLAYING_THE_GAME);
+                    }
+                    if(menu_button->is_pressed(x, y)) {
+                        update_game_state(RESTARTING);
                     }
                 }
                 break;

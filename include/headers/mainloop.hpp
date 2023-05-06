@@ -9,7 +9,7 @@
 
 class MainLoop {
 private:
-    Button *play_button, *pause_button, *quit_button, *resume_button, *restart_button, *level1_button, *level2_button, *option_button, *giai_dieu_to_quoc_button, *hanh_khuc_ngay_va_dem_button, *dat_nuoc_tron_niem_vui_button;
+    Button *play_button, *pause_button, *quit_button, *resume_button, *restart_button, *menu_button, *level1_button, *level2_button, *option_button, *giai_dieu_to_quoc_button, *hanh_khuc_ngay_va_dem_button, *dat_nuoc_tron_niem_vui_button;
     Textbox *title, *you_won, *you_lost, *choose_sound_track;
     Background bg;
     Player cat;
