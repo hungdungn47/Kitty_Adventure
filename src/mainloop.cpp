@@ -4,6 +4,7 @@
 MainLoop::MainLoop() { 
     level1 = Map(1);
     level2 = Map(2);
+    level3 = Map(3);
     game_state = STARTING_SCREEN;
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     frame = 0;
@@ -24,6 +25,7 @@ MainLoop::MainLoop() {
 
     level1_button = new Button("Level 1", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
     level2_button = new Button("Level 2", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
+    level3_button = new Button("Level 3", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 160, 200, 100});
 
     giai_dieu_to_quoc_button = new Button("Giai dieu To quoc", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 150, 400, 100});
     hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2, 400, 100});
@@ -49,6 +51,7 @@ void MainLoop::render_game() {
             bg.render_menu();
             level1_button->render();
             level2_button->render();
+            level3_button->render();
             break;
         case PLAYING_THE_GAME:
             map.render(camera);
@@ -112,6 +115,10 @@ void MainLoop::handle_event(SDL_Event e) {
                         Mix_PlayMusic(background_music, -1);
                     } else if(level2_button->is_pressed(x, y)) {
                         map = level2;
+                        update_game_state(PLAYING_THE_GAME);
+                        Mix_PlayMusic(background_music, -1);
+                    } else if(level3_button->is_pressed(x, y)) {
+                        map = level3;
                         update_game_state(PLAYING_THE_GAME);
                         Mix_PlayMusic(background_music, -1);
                     }

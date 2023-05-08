@@ -6,7 +6,7 @@ Background::Background() {
     background_rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     int w = menu_background_texture.getWidth();
     int h = menu_background_texture.getHeight();
-    menu_background_rect = {SCREEN_WIDTH / 2 - w, SCREEN_HEIGHT / 2 - h, w * 2, h * 2};
+    menu_background_rect = {SCREEN_WIDTH / 2 - w * 1.5, SCREEN_HEIGHT / 2 - h * 1.5, w * 3, h * 3};
 }
 
 Background::~Background() {
