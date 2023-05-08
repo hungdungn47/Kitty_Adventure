@@ -28,6 +28,8 @@ void Player::init() {
     for(int i = 0; i < RUNNING_ANIMATION_FRAMES; i++) {
         running_sprite_clips[i] = {7 + 32 * i, 19 + 32 * 4, 16, 13};
     }
+
+    player_orientation = NORMAL;
 }
 
 Player::~Player() {
@@ -70,10 +72,6 @@ void Player::move(vector<Tile*> tiles, Map level) {
 
     mBox.y += mVelY;
 
-    // if(mBox.y + PLAYER_HEIGHT > level.LEVEL_HEIGHT) {
-    //     mBox.y = level.LEVEL_HEIGHT - PLAYER_HEIGHT;
-    //     mVelY = 0;
-    // }
     if(touchesWall(mBox, tiles)) {
         mBox.y -= mVelY;
         mVelY = 0;
