@@ -9,27 +9,27 @@ MainLoop::MainLoop() {
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     frame = 0;
 
-    title = new Textbox(WHITE_COLOR, "KITTY'S ADVENTURE", {SCREEN_WIDTH / 2 - 200, 50, 400, 100}, 100, "res/fonts/Pacifico.ttf");
-    you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
-    you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
-    choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", {SCREEN_WIDTH / 2 - 250, 50, 500, 100}, 100, "res/fonts/Pacifico.ttf");
+    title = new Textbox(WHITE_COLOR, "KITTY'S ADVENTURE", 200, 20, 60, "res/fonts/Pacifico.ttf");
+    you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", 200, 20, 60, "res/fonts/Pacifico.ttf");
+    you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", 200, 20, 60, "res/fonts/Pacifico.ttf");
+    choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", 200, 20, 60, "res/fonts/Pacifico.ttf");
 
-    play_button = new Button("Play", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
-    option_button = new Button("Option", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
+    play_button = new Button("Play", 500, 200);
+    option_button = new Button("Option", 500, 300);
 
-    resume_button = new Button("Resume", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
-    menu_button = new Button("Menu", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
+    resume_button = new Button("Resume", 500, 200);
+    menu_button = new Button("Menu", 500, 300);
     
-    quit_button = new Button("Quit", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
-    restart_button = new Button("Menu", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
+    quit_button = new Button("Quit", 500, 300);
+    restart_button = new Button("Menu", 500, 200);
 
-    level1_button = new Button("Level 1", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 - 130, 200, 100});
-    level2_button = new Button("Level 2", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 30, 200, 100});
-    level3_button = new Button("Level 3", {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT/2 + 160, 200, 100});
+    level1_button = new Button("Level 1", 20, 400);
+    level2_button = new Button("Level 2", 300, 400);
+    level3_button = new Button("Level 3", 580, 400);
 
-    giai_dieu_to_quoc_button = new Button("Giai dieu To quoc", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 - 150, 400, 100});
-    hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2, 400, 100});
-    dat_nuoc_tron_niem_vui_button = new Button("Dat nuoc tron niem vui", {SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2 + 150, 400, 100});
+    giai_dieu_to_quoc_button = new Button("Giai dieu To quoc", 100, 200);
+    hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", 100, 300);
+    dat_nuoc_tron_niem_vui_button = new Button("Dat nuoc tron niem vui", 100, 400);
 
     if(!LoadMusic()) {
         std::cout << "Failed to load music" << std::endl;
@@ -38,20 +38,22 @@ MainLoop::MainLoop() {
 
 void MainLoop::render_game() {
     bg.render();
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
     switch (game_state)
     {
         case STARTING_SCREEN:
-            bg.render_menu();
-            play_button->render();
-            option_button->render();
+            //bg.render_menu();
+            play_button->render(mouseX, mouseY);
+            option_button->render(mouseX, mouseY);
             title->render_text_box();
             break;
         case CHOOSING_LEVEL:
             title->render_text_box();
-            bg.render_menu();
-            level1_button->render();
-            level2_button->render();
-            level3_button->render();
+            //bg.render_menu();
+            level1_button->render(mouseX, mouseY);
+            level2_button->render(mouseX, mouseY);
+            level3_button->render(mouseX, mouseY);
             break;
         case PLAYING_THE_GAME:
             map.render(camera);
@@ -60,27 +62,27 @@ void MainLoop::render_game() {
         case PAUSING:
             map.render(camera);
             cat.render(camera, frame);
-            bg.render_menu();
-            resume_button->render();
-            menu_button->render();
+            //bg.render_menu();
+            resume_button->render(mouseX, mouseY);
+            menu_button->render(mouseX, mouseY);
             break;
         case GAME_OVER:
             you_lost->render_text_box();
-            bg.render_menu();
-            quit_button->render();
-            restart_button->render();
+            //bg.render_menu();
+            quit_button->render(mouseX, mouseY);
+            restart_button->render(mouseX, mouseY);
             break;
         case WIN:
             you_won->render_text_box();
-            bg.render_menu();
-            quit_button->render();
-            restart_button->render();
+            //bg.render_menu();
+            quit_button->render(mouseX, mouseY);
+            restart_button->render(mouseX, mouseY);
             break;
         case CHOOSING_SOUND_TRACK:
             choose_sound_track->render_text_box();
-            giai_dieu_to_quoc_button->render();
-            hanh_khuc_ngay_va_dem_button->render();
-            dat_nuoc_tron_niem_vui_button->render();
+            giai_dieu_to_quoc_button->render(mouseX, mouseY);
+            hanh_khuc_ngay_va_dem_button->render(mouseX, mouseY);
+            dat_nuoc_tron_niem_vui_button->render(mouseX, mouseY);
             break;
         default:
             break;

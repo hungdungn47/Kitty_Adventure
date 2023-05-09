@@ -29,4 +29,4 @@ enum GameState {
     CHOOSING_SOUND_TRACK
 };
 
-const static char WINDOW_TITLE[] = "Geometry dumb";
+const static char WINDOW_TITLE[] = "Kitty's Adventure";
