@@ -15,7 +15,7 @@ Tile::Tile(int x, int y, int tileType) {
     //Get the tile type
     mType = tileType;
 
-    gTileTexture.loadFromFile(gRenderer, "res/Mossy_Tileset/Mossy_TileSet_2.png");
+    gTileTexture.loadFromFile(gRenderer, "res/Mossy_Tileset/Mossy_TileSet_3.png");
 }
 
 Tile::~Tile() {
@@ -26,7 +26,7 @@ void Tile::render(SDL_Rect& camera, SDL_Rect gTileClips[]) {
     //If the tile is on screen
     if(checkCollision(mBox, camera) && mType != -1) {
         //Show the tile
-        gTileTexture.render(gRenderer, mBox.x - camera.x, mBox.y - camera.y, &gTileClips[mType]);
+        gTileTexture.render(gRenderer, mBox.x - camera.x, mBox.y - camera.y, &gTileClips[mType], &mBox);
     }
 }
 

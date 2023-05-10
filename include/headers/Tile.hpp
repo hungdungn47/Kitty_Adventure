@@ -3,8 +3,8 @@
 #include "constants.hpp"
 
 //Tile constants
-const int TILE_CLIP_WIDTH = 80;
-const int TILE_CLIP_HEIGHT = 80;
+const int TILE_CLIP_WIDTH = 40;
+const int TILE_CLIP_HEIGHT = 40;
 const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 80;
 const int TOTAL_TILE_SPRITES = 49;
