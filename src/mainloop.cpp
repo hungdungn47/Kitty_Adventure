@@ -2,30 +2,31 @@
 #include "SDL_mixer_functions.hpp"
 
 MainLoop::MainLoop() { 
-    level1 = Map(1);
-    level2 = Map(2);
-    level3 = Map(3);
+    level1 = new Map(1);
+    level2 = new Map(2);
+    level3 = new Map(3);
     game_state = STARTING_SCREEN;
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     frame = 0;
 
-    title = new Textbox(WHITE_COLOR, "KITTY'S ADVENTURE", 200, 20, 60, "res/fonts/Pacifico.ttf");
-    you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", 200, 20, 60, "res/fonts/Pacifico.ttf");
-    you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", 200, 20, 60, "res/fonts/Pacifico.ttf");
-    choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", 200, 20, 60, "res/fonts/Pacifico.ttf");
+    // Textbox(SDL_Color _text_color, std::string _text_string, int x, int y, int font_size, std::string _font_path)
+    title = new Textbox(WHITE_COLOR, "KITTY'S ADVENTURE", 157, 20, 60, "res/fonts/Pacifico.ttf");
+    you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", 141, 20, 60, "res/fonts/Pacifico.ttf");
+    you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", 277, 20, 60, "res/fonts/Pacifico.ttf");
+    choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", 262, 20, 60, "res/fonts/Pacifico.ttf");
 
-    play_button = new Button("Play", 500, 200);
-    option_button = new Button("Option", 500, 300);
+    play_button = new Button("Play", 500, 300);
+    option_button = new Button("Option", 500, 450);
 
-    resume_button = new Button("Resume", 500, 200);
-    menu_button = new Button("Menu", 500, 300);
+    resume_button = new Button("Resume", 500, 300);
+    menu_button = new Button("Menu", 500, 450);
     
-    quit_button = new Button("Quit", 500, 300);
-    restart_button = new Button("Menu", 500, 200);
+    quit_button = new Button("Quit", 500, 450);
+    restart_button = new Button("Menu", 500, 300);
 
-    level1_button = new Button("Level 1", 20, 400);
-    level2_button = new Button("Level 2", 300, 400);
-    level3_button = new Button("Level 3", 580, 400);
+    level1_button = new Button("Level 1", 110, 375);
+    level2_button = new Button("Level 2", 410, 375);
+    level3_button = new Button("Level 3", 710, 375);
 
     giai_dieu_to_quoc_button = new Button("Giai dieu To quoc", 100, 200);
     hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", 100, 300);
@@ -56,11 +57,11 @@ void MainLoop::render_game() {
             level3_button->render(mouseX, mouseY);
             break;
         case PLAYING_THE_GAME:
-            map.render(camera);
+            map->render(camera);
             cat.render(camera, frame);
             break;
         case PAUSING:
-            map.render(camera);
+            map->render(camera);
             cat.render(camera, frame);
             //bg.render_menu();
             resume_button->render(mouseX, mouseY);
@@ -202,10 +203,10 @@ void MainLoop::handle_event(SDL_Event e) {
         }
     }
     if(game_state == PLAYING_THE_GAME) {
-        cat.move(map.get_tile_set(), map);
-        cat.setCamera(camera, map);
+        cat.move(map->get_tile_set(), *map);
+        cat.setCamera(camera, *map);
         if(cat.is_game_over(camera)) update_game_state(GAME_OVER);
-        if(cat.win(map)) update_game_state(WIN);
+        if(cat.win(*map)) update_game_state(WIN);
     }
     if(game_state == RESTARTING) {
         std::cout << "Restarting" << std::endl;

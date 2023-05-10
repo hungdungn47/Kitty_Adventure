@@ -9,6 +9,7 @@ Textbox::Textbox(SDL_Color _text_color, std::string _text_string, int x, int y, 
     text_string = _text_string;
     load_text_texture();
     text_rect = {x, y, text_texture.getWidth(), text_texture.getHeight()};
+    std::cout << text_string << ": " << text_rect.x << " " << text_rect.y << " " << text_rect.w << " " << text_rect.h << std::endl;
 }
 
 Textbox::~Textbox() {

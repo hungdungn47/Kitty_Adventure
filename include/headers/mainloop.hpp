@@ -15,7 +15,7 @@ private:
     Textbox *title, *you_won, *you_lost, *choose_sound_track;
     Background bg;
     Player cat;
-    Map map, level1, level2, level3;
+    Map *map, *level1, *level2, *level3;
     SDL_Rect camera;
     int frame;
 
