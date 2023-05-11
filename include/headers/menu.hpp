@@ -15,6 +15,7 @@ public:
     void update_text(std::string new_text);
     void load_text_texture();
     void render_text_box();
+    void render_center();
     SDL_Rect get_rect() {return text_rect;};
     std::string get_text() {return text_string;};
     SDL_Color get_color() {return text_color;};

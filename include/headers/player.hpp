@@ -7,8 +7,7 @@ class Player {
 public:
     enum State {
         IDLE,
-        RUN,
-        JUMP
+        RUN
     };
     enum Orientation {
         NORMAL,
@@ -17,10 +16,6 @@ public:
     //Number of frames of the animation
     static const int IDLE_ANIMATION_FRAMES = 4;
     static const int RUNNING_ANIMATION_FRAMES = 8;
-    
-    //Sprite's dimension (to cut from sprite sheet)
-    static const int SPRITE_WIDTH = 13;
-    static const int SPRITE_HEIGHT = 13;
     
     //Rendering dimension
     static const int PLAYER_WIDTH = 75;
@@ -42,7 +37,7 @@ public:
 
     void render(SDL_Rect& camera, int& frame);
 
-    void set_velocity(float _mVelX);
+    void set_velocity(int _mVelX);
 
     bool is_game_over(SDL_Rect camera);
 
@@ -67,9 +62,10 @@ private:
     State player_state;
     Orientation player_orientation;
 
-    float mVelX, mVelY;
+    int mVelX, mVelY;
 
-    float acceleration = 2;
+    int acceleration = 2;
 
-    LTexture mTexture;
+    LTexture idle_texture;
+    LTexture running_texture;
 };

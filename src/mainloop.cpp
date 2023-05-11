@@ -3,17 +3,17 @@
 
 MainLoop::MainLoop() { 
     level1 = new Map(1);
-    level2 = new Map(2);
-    level3 = new Map(3);
+    // level2 = new Map(2);
+    // level3 = new Map(3);
     game_state = STARTING_SCREEN;
     camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     frame = 0;
 
     // Textbox(SDL_Color _text_color, std::string _text_string, int x, int y, int font_size, std::string _font_path)
-    title = new Textbox(WHITE_COLOR, "KITTY'S ADVENTURE", 157, 20, 60, "res/fonts/Pacifico.ttf");
-    you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", 141, 20, 60, "res/fonts/Pacifico.ttf");
-    you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", 277, 20, 60, "res/fonts/Pacifico.ttf");
-    choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", 262, 20, 60, "res/fonts/Pacifico.ttf");
+    title = new Textbox(WHITE_COLOR, "KITTY'S ADVENTURE", 157, 50, 80, josefin_font);
+    you_won = new Textbox(WHITE_COLOR, "Congratulations!!! You won", 141, 50, 60, pacifico_font);
+    you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", 277, 50, 60, pacifico_font);
+    choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", 262, 50, 60, pacifico_font);
 
     play_button = new Button("Play", 700, 300);
     option_button = new Button("Option", 700, 450);
@@ -47,11 +47,11 @@ void MainLoop::render_game() {
             bg.render_wallpaper();
             play_button->render(mouseX, mouseY);
             option_button->render(mouseX, mouseY);
-            title->render_text_box();
+            title->render_center();
             break;
         case CHOOSING_LEVEL:
             bg.render_wallpaper();
-            title->render_text_box();
+            title->render_center();
             level1_button->render(mouseX, mouseY);
             level2_button->render(mouseX, mouseY);
             level3_button->render(mouseX, mouseY);
@@ -68,18 +68,18 @@ void MainLoop::render_game() {
             break;
         case GAME_OVER:
             bg.render_wallpaper();
-            you_lost->render_text_box();
+            you_lost->render_center();
             quit_button->render(mouseX, mouseY);
             restart_button->render(mouseX, mouseY);
             break;
         case WIN:
             bg.render_wallpaper();
-            you_won->render_text_box();
+            you_won->render_center();
             quit_button->render(mouseX, mouseY);
             restart_button->render(mouseX, mouseY);
             break;
         case CHOOSING_SOUND_TRACK:
-            choose_sound_track->render_text_box();
+            choose_sound_track->render_center();
             giai_dieu_to_quoc_button->render(mouseX, mouseY);
             hanh_khuc_ngay_va_dem_button->render(mouseX, mouseY);
             dat_nuoc_tron_niem_vui_button->render(mouseX, mouseY);

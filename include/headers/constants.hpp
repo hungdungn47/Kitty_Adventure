@@ -29,4 +29,10 @@ enum GameState {
     CHOOSING_SOUND_TRACK
 };
 
-const static char WINDOW_TITLE[] = "Kitty's Adventure";
+const char WINDOW_TITLE[] = "Kitty's Adventure";
+
+const char southern_font[] = "res/fonts/Southern.ttf";
+const char pacifico_font[] = "res/fonts/Pacifico.ttf";
+const char josefin_font[] = "res/fonts/josefin-sans/JosefinSans-Regular.ttf";
+const char ostrich_font[] = "res/fonts/ostrich-sans/ostrich-regular.ttf";
+const char caviar_dream_font[] = "res/fonts/Caviar-Dreams/CaviarDreams.ttf";

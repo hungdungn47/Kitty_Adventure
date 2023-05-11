@@ -12,28 +12,27 @@ void Player::init() {
     player_state = IDLE;
     player_orientation = NORMAL;
 
-    //renderQuad = {mPosX, mPosY, PLAYER_WIDTH, PLAYER_HEIGHT};
-
     //load media
-    mTexture.loadFromFile(gRenderer, "res/Cat Sprite Sheet.png");
+    idle_texture.loadFromFile(gRenderer, "res/images/idle_sprite_sheet.png");
+    running_texture.loadFromFile(gRenderer, "res/images/running_sprite_sheet.png");
     
     //Initialize player box
     mBox = {80 * 5, 80 * 4, PLAYER_WIDTH, PLAYER_HEIGHT};
     
-    //Initialize sprite clips
-    for(int i = 0; i < IDLE_ANIMATION_FRAMES; i++) {
-        idle_sprite_clips[i] = {9 + 32 * i, 19, SPRITE_WIDTH, SPRITE_HEIGHT};
-    } 
+    // Set sprite clips
+    idle_sprite_clips[0] = {24, 25, 200, 200};
+    idle_sprite_clips[1] = {249, 25, 200, 200};
+    idle_sprite_clips[2] = {474, 25, 200, 200};
+    idle_sprite_clips[3] = {699, 25, 200, 200};
 
     for(int i = 0; i < RUNNING_ANIMATION_FRAMES; i++) {
-        running_sprite_clips[i] = {7 + 32 * i, 19 + 32 * 4, 16, 13};
+        running_sprite_clips[i] = {202 * i, 25, 180, 150};
     }
-
-    player_orientation = NORMAL;
 }
 
 Player::~Player() {
-    mTexture.free();
+    idle_texture.free();
+    running_texture.free();
 }
 
 void Player::handleEvent(SDL_Event& e) {
@@ -43,8 +42,6 @@ void Player::handleEvent(SDL_Event& e) {
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP: mVelY -= PLAYER_VEL; break;
-            case SDLK_DOWN: mVelY += PLAYER_VEL; break;
             case SDLK_SPACE: acceleration = -acceleration; break;
         }
     }
@@ -138,22 +135,25 @@ void Player::render(SDL_Rect& camera, int& frame) {
         }
     }
 
-    //set current clip based on player state
+    // set current clip based on player state
     if(player_state == IDLE) {
         current_clip = idle_sprite_clips[frame / 5];
+        idle_texture.render(gRenderer, mBox.x - camera.x, mBox.y - camera.y, &current_clip, &mBox, 0, NULL, player_flip);
+        
+        //modify the frame
+        frame++;
+        if(frame / 5 >= IDLE_ANIMATION_FRAMES) frame = 0;
     } else {
-        current_clip = running_sprite_clips[frame / 5];
+        current_clip = running_sprite_clips[frame / 4];
+        running_texture.render(gRenderer, mBox.x - camera.x, mBox.y - camera.y, &current_clip, &mBox, 0, NULL, player_flip);
+            
+        //modify the frame
+        frame++;
+        if(frame / 4 >= RUNNING_ANIMATION_FRAMES) frame = 0;
     }
-
-    //render
-    mTexture.render(gRenderer, mBox.x - camera.x, mBox.y - camera.y, &current_clip, &mBox, 0, NULL, player_flip);
-    
-    //modify the frame
-    frame++;
-    if(frame / 5 >= IDLE_ANIMATION_FRAMES) frame = 0;
 }
 
-void Player::set_velocity(float _mVelX) {
+void Player::set_velocity(int _mVelX) {
     mVelX = _mVelX;
 }
 

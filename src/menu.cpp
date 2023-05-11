@@ -35,13 +35,17 @@ void Textbox::render_text_box()
     text_texture.render(gRenderer, text_rect.x, text_rect.y);
 }
 
+void Textbox::render_center() {
+    text_texture.render(gRenderer, SCREEN_WIDTH / 2 - text_rect.w / 2, text_rect.y);
+}
+
 Button::Button(std::string _button_name, int x, int y) { 
     button_name = _button_name;
 
     //The text rect is a bit smaller than the button rect so that the text is inside the button
     //SDL_Rect text_rect = {button_rect.x + 20, button_rect.y + 20, button_rect.w - 40, button_rect.h - 40};
-    button_textbox = new Textbox(WHITE_COLOR, button_name, x, y, 50, "res/fonts/Southern.ttf");
-    hovering_textbox = new Textbox(GREEN_COLOR, button_name, x, y, 50, "res/fonts/Southern.ttf");
+    button_textbox = new Textbox(WHITE_COLOR, button_name, x, y, 50, southern_font);
+    hovering_textbox = new Textbox(GREEN_COLOR, button_name, x, y, 50, southern_font);
 
     text_rect = button_textbox->get_rect();
     button_rect = {text_rect.x - 20, text_rect.y - 20, text_rect.w + 40, text_rect.h + 40};
