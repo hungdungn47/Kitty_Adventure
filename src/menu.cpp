@@ -43,8 +43,9 @@ Button::Button(std::string _button_name, int x, int y) {
     button_textbox = new Textbox(WHITE_COLOR, button_name, x, y, 50, "res/fonts/Southern.ttf");
     hovering_textbox = new Textbox(GREEN_COLOR, button_name, x, y, 50, "res/fonts/Southern.ttf");
 
-    button_rect = button_textbox->get_rect();
-    //load_texture();
+    text_rect = button_textbox->get_rect();
+    button_rect = {text_rect.x - 20, text_rect.y - 20, text_rect.w + 40, text_rect.h + 40};
+    load_texture();
 }
 
 bool Button::is_pressed(int mouse_x, int mouse_y) {
@@ -65,13 +66,14 @@ void Button::load_texture() {
 }
 
 void Button::render(int mouseX, int mouseY) {
-    //button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
     SDL_SetRenderDrawColor(gRenderer, 255, 0, 0, 0);
     SDL_RenderDrawRect(gRenderer, &button_rect);
 
     if(is_mouse_over(mouseX, mouseY)) {
+        button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
         hovering_textbox->render_text_box();
     } else {
+        button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
         button_textbox->render_text_box();
     }
 }

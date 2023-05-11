@@ -15,22 +15,22 @@ MainLoop::MainLoop() {
     you_lost = new Textbox(WHITE_COLOR, "Oops!!! You lost", 277, 20, 60, "res/fonts/Pacifico.ttf");
     choose_sound_track = new Textbox(WHITE_COLOR, "Choose sound track", 262, 20, 60, "res/fonts/Pacifico.ttf");
 
-    play_button = new Button("Play", 500, 300);
-    option_button = new Button("Option", 500, 450);
+    play_button = new Button("Play", 700, 300);
+    option_button = new Button("Option", 700, 450);
 
     resume_button = new Button("Resume", 500, 300);
     menu_button = new Button("Menu", 500, 450);
     
-    quit_button = new Button("Quit", 500, 450);
-    restart_button = new Button("Menu", 500, 300);
+    quit_button = new Button("Quit", 700, 450);
+    restart_button = new Button("Menu", 700, 300);
 
-    level1_button = new Button("Level 1", 110, 375);
-    level2_button = new Button("Level 2", 410, 375);
-    level3_button = new Button("Level 3", 710, 375);
+    level1_button = new Button("Level 1", 700, 200);
+    level2_button = new Button("Level 2", 700, 375);
+    level3_button = new Button("Level 3", 700, 550);
 
     giai_dieu_to_quoc_button = new Button("Giai dieu To quoc", 100, 200);
-    hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", 100, 300);
-    dat_nuoc_tron_niem_vui_button = new Button("Dat nuoc tron niem vui", 100, 400);
+    hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", 100, 375);
+    dat_nuoc_tron_niem_vui_button = new Button("Dat nuoc tron niem vui", 100, 550);
 
     if(!LoadMusic()) {
         std::cout << "Failed to load music" << std::endl;
@@ -44,14 +44,14 @@ void MainLoop::render_game() {
     switch (game_state)
     {
         case STARTING_SCREEN:
-            //bg.render_menu();
+            bg.render_wallpaper();
             play_button->render(mouseX, mouseY);
             option_button->render(mouseX, mouseY);
             title->render_text_box();
             break;
         case CHOOSING_LEVEL:
+            bg.render_wallpaper();
             title->render_text_box();
-            //bg.render_menu();
             level1_button->render(mouseX, mouseY);
             level2_button->render(mouseX, mouseY);
             level3_button->render(mouseX, mouseY);
@@ -63,19 +63,18 @@ void MainLoop::render_game() {
         case PAUSING:
             map->render(camera);
             cat.render(camera, frame);
-            //bg.render_menu();
             resume_button->render(mouseX, mouseY);
             menu_button->render(mouseX, mouseY);
             break;
         case GAME_OVER:
+            bg.render_wallpaper();
             you_lost->render_text_box();
-            //bg.render_menu();
             quit_button->render(mouseX, mouseY);
             restart_button->render(mouseX, mouseY);
             break;
         case WIN:
+            bg.render_wallpaper();
             you_won->render_text_box();
-            //bg.render_menu();
             quit_button->render(mouseX, mouseY);
             restart_button->render(mouseX, mouseY);
             break;

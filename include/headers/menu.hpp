@@ -23,7 +23,7 @@ public:
 class Button {
 private:
     Textbox* button_textbox, *hovering_textbox;
-    SDL_Rect src_rect, button_rect;
+    SDL_Rect text_rect, button_rect;
     std::string button_name;
     LTexture button_texture;
 public:

@@ -14,12 +14,17 @@ Background::~Background() {
 }
 
 void Background::load_texture() {
-    background_texture.loadFromFile(gRenderer, "res/images/background.png");
+    background_texture.loadFromFile(gRenderer, "res/images/background_0.png");
     menu_background_texture.loadFromFile(gRenderer, "res/images/menu_background.png");
+    wallpaper_texture.loadFromFile(gRenderer, "res/images/Background.png");
 }
 
 void Background::render() {
     background_texture.render(gRenderer, 0, 0, NULL, &background_rect);
+}
+
+void Background::render_wallpaper() {
+    wallpaper_texture.render(gRenderer, 0, 0, NULL, &background_rect);
 }
 
 void Background::render_menu() {

@@ -15,7 +15,7 @@ Tile::Tile(int x, int y, int tileType) {
     //Get the tile type
     mType = tileType;
 
-    gTileTexture.loadFromFile(gRenderer, "res/Mossy_Tileset/Mossy_TileSet_3.png");
+    gTileTexture.loadFromFile(gRenderer, "res/Mossy_Tileset/Mossy_TileSet_280.png");
 }
 
 Tile::~Tile() {
