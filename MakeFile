@@ -1,2 +1,2 @@
 all:
-	g++ -IC:/SDL2-w64/include/SDL2 -Iinclude/headers -LC:/SDL2-w64/lib -o main src/*.cpp -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+	g++ -Iinclude/SDL2 -Iinclude/headers -Llib -o main src/*.cpp -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
