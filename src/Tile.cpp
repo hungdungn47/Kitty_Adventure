@@ -66,7 +66,6 @@ Map::Map(int _level) {
             break;
         case 2:
             set_tiles("res/Tile_map/Level_2.csv");
-            std::cout << "Level 2\n";
             break;
         case 3:
             set_tiles("res/Tile_map/Level_3.csv");

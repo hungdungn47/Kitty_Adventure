@@ -12,8 +12,8 @@ extern Mix_Music* hanh_khuc_ngay_va_dem;
 extern Mix_Music* giai_dieu_to_quoc;
 
 extern Mix_Chunk* button_select_sound;
-extern Mix_Chunk* reverse_sound;
-extern Mix_Chunk* eatable_sound;
+extern Mix_Chunk* jump_sound;
+extern Mix_Chunk* game_over_sound;
 
 bool LoadMusic();
 void CloseMusic();

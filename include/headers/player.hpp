@@ -2,6 +2,7 @@
 #include "utils.hpp"
 #include "constants.hpp"
 #include "Tile.hpp"
+#include "SDL_mixer_functions.hpp"
 
 class Player {
 public:
@@ -37,7 +38,9 @@ public:
 
     void render(SDL_Rect& camera, int& frame);
 
-    void set_velocity(int _mVelX);
+    void start_moving();
+
+    void stop_moving();
 
     bool is_game_over(SDL_Rect camera);
 

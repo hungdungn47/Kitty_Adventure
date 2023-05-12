@@ -11,8 +11,8 @@ Mix_Music* dat_nuoc_tron_niem_vui = NULL;
 Mix_Music* hanh_khuc_ngay_va_dem = NULL;
 
 Mix_Chunk* button_select_sound = NULL;
-Mix_Chunk* reverse_sound = NULL;
-Mix_Chunk* eatable_sound = NULL;
+Mix_Chunk* jump_sound = NULL;
+Mix_Chunk* game_over_sound = NULL;
 
 bool LoadMusic()
 {
@@ -38,17 +38,33 @@ bool LoadMusic()
 		cout << "Failed to load button select sound! SDL_mixer Error: " << Mix_GetError() << endl;
 		success = false;
 	}
+	jump_sound = Mix_LoadWAV("res/sounds/jump.mp3");
+	if(jump_sound == NULL) {
+		cout << "Failed to load jump sound! Error: " << Mix_GetError() << endl;
+		success = false;
+	}
+	game_over_sound = Mix_LoadWAV("res/sounds/dead.mp3");
+	if(game_over_sound == NULL) {
+		cout << "Failed to load game over sound! Error: " << Mix_GetError() << endl;
+		success = false;
+	}
 	return success;
 }
 void CloseMusic()
 {
-	Mix_FreeChunk(eatable_sound);
-	Mix_FreeChunk(reverse_sound);
+	//Mix_FreeChunk(jump_sound);
 	Mix_FreeChunk(button_select_sound);
-	eatable_sound = NULL;
-	reverse_sound = NULL;
+	// Mix_FreeChunk(game_over_sound);
+	// game_over_sound = NULL;
+	// jump_sound = NULL;
 	button_select_sound = NULL;
 	Mix_FreeMusic(background_music);
+	Mix_FreeMusic(giai_dieu_to_quoc);
+	Mix_FreeMusic(hanh_khuc_ngay_va_dem);
+	Mix_FreeMusic(dat_nuoc_tron_niem_vui);
 	background_music = NULL;
+	giai_dieu_to_quoc = NULL;
+	hanh_khuc_ngay_va_dem = NULL;
+	dat_nuoc_tron_niem_vui = NULL;
 	Mix_Quit();
 }

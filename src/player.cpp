@@ -36,24 +36,15 @@ Player::~Player() {
 }
 
 void Player::handleEvent(SDL_Event& e) {
-        //If a key was pressed
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
-        //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_SPACE: acceleration = -acceleration; break;
-        }
-    }
-        //If a key was released
-    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP: mVelY += PLAYER_VEL; break;
-            case SDLK_DOWN: mVelY -= PLAYER_VEL; break;
-            //case SDLK_SPACE: mVelY += JUMP_VEL; break;
+            // If Space is pressed, reverse the gravity
+            case SDLK_SPACE: 
+                Mix_PlayChannel(-1, jump_sound, 0);
+                acceleration = -acceleration; 
+                break;
         }
     }
 }
@@ -80,11 +71,11 @@ bool Player::win(Map level) {
 }
 
 void Player::setCamera(SDL_Rect& camera, Map level) {
-    //Center the camera over the dot
-    // camera.x = ( mBox.x + PLAYER_WIDTH / 2 ) - SCREEN_WIDTH / 2;
-    // camera.y = ( mBox.y + PLAYER_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
+
+    // If the player is on the screen, the camera move a bit slower than the player
     if(mBox.x + PLAYER_WIDTH > camera.x + SCREEN_WIDTH) camera.x += PLAYER_VEL;
     else camera.x += PLAYER_VEL - 2;
+
     //Keep the camera in bounds
     if( camera.x < 0 )
     { 
@@ -153,8 +144,12 @@ void Player::render(SDL_Rect& camera, int& frame) {
     }
 }
 
-void Player::set_velocity(int _mVelX) {
-    mVelX = _mVelX;
+void Player::start_moving() {
+    mVelX = PLAYER_VEL;
+}
+
+void Player::stop_moving() {
+    mVelX = 0;
 }
 
 bool Player::is_game_over(SDL_Rect camera) {

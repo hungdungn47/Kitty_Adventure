@@ -4,9 +4,6 @@
 Background::Background() {
     load_texture();
     background_rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-    int w = menu_background_texture.getWidth();
-    int h = menu_background_texture.getHeight();
-    menu_background_rect = {SCREEN_WIDTH / 2 - w * 1.5, SCREEN_HEIGHT / 2 - h * 1.5, w * 3, h * 3};
 }
 
 Background::~Background() {
@@ -15,7 +12,6 @@ Background::~Background() {
 
 void Background::load_texture() {
     background_texture.loadFromFile(gRenderer, "res/images/background_0.png");
-    menu_background_texture.loadFromFile(gRenderer, "res/images/menu_background.png");
     wallpaper_texture.loadFromFile(gRenderer, "res/images/Background.png");
 }
 
@@ -25,8 +21,4 @@ void Background::render() {
 
 void Background::render_wallpaper() {
     wallpaper_texture.render(gRenderer, 0, 0, NULL, &background_rect);
-}
-
-void Background::render_menu() {
-    menu_background_texture.render(gRenderer, menu_background_rect.x, menu_background_rect.y, NULL, &menu_background_rect);
 }
