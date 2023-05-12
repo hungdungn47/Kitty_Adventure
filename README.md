@@ -12,8 +12,12 @@ I have included all the necessary files in the project. So you only have to:
 
 Now enjoy the game !!!
 ## How to play
-This is a one-button game. Press the `space bar` to reverse the direction of gravity, so that the kitty falls in opposite direction.
+This is a one-button game. Press the `space bar` to reverse the direction of gravity, so that the kitty falls in opposite direction.\
+Press `Esc` if you wanna pause the game.
 ## An interesting feature
 You can choose background music for the game by clicking `Option` in the main menu.\
 The game was made in the Reunification day vacation, so the music list is very special, which makes this feature interesting :>.
-Try and enjoy !!!
+## Gratitude
+I'm a newbie programmer, and this is my first complete project, so there are still many things need to be fixed and optimized.\
+I'm trying my best to improve my progamming skills day by day, and create much better projects afterward.\
+Thanks for your attention. If you like this cute small game, hope you can help me improve it, or give me a star so that I have more motivation to innovate the game.
