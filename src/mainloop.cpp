@@ -11,34 +11,36 @@ MainLoop::MainLoop() {
 
     // Textbox(SDL_Color _text_color, std::string _text_string, int x, int y, int font_size, std::string _font_path)
     title = new Textbox(DEEP_GREEN_COLOR, "KITTY'S  ADVENTURE", 0, 70, 70, karmatic_arcade_font);
-    you_won = new Textbox(BLACK_COLOR, "Congratulations!!! You won", 0, 70, 40, karmatic_arcade_font);
-    you_lost = new Textbox(BLACK_COLOR, "Oops!!! You lost", 0, 70, 40, karmatic_arcade_font);
-    choose_sound_track = new Textbox(BLACK_COLOR, "Choose background music", 0, 70, 40, karmatic_arcade_font);
+    you_won = new Textbox(BLACK_COLOR, "Congratulations!!! You won", 0, 70, 50, karmatic_arcade_font);
+    you_lost = new Textbox(BLACK_COLOR, "Oops!!! You lost", 0, 70, 50, karmatic_arcade_font);
+    choose_sound_track = new Textbox(BLACK_COLOR, "Choose background music", 0, 70, 50, karmatic_arcade_font);
 
     play_button = new Button("Play   ", 700, 300);
     option_button = new Button("Option", 700, 450);
     quit_button_0 = new Button("Quit   ", 700, 600);
 
-    resume_button = new Button("Resume", 500, 300);
-    menu_button = new Button("Menu", 500, 450);
+    resume_button = new Button("Resume", 450, 400);
+    menu_button = new Button(" Menu ", 330, 550);
+    retry_button_0 = new Button("Retry", 600,  550);
     
-    quit_button = new Button("Quit", 700, 600);
-    restart_button = new Button("Menu", 700, 450);
     retry_button = new Button("Retry", 700, 300);
+    restart_button = new Button("Menu ", 700, 450);
+    quit_button = new Button("Quit ", 700, 600);
 
-    level1_button = new Button("Level 1", 700, 200);
-    level2_button = new Button("Level 2", 700, 375);
-    level3_button = new Button("Level 3", 700, 550);
+    level1_button = new Button("Level 1", 700, 300);
+    level2_button = new Button("Level 2", 700, 450);
+    level3_button = new Button("Level 3", 700, 600);
 
     giai_dieu_to_quoc_button = new Button("Giai dieu To quoc", 100, 200);
     hanh_khuc_ngay_va_dem_button = new Button("Hanh khuc ngay va dem", 100, 350);
     dat_nuoc_tron_niem_vui_button = new Button("Dat nuoc tron niem vui", 100, 500);
-    no_music_button = new Button("No background music", 100, 650);
+    no_music_button = new Button("Default background music", 100, 650);
 
     if(!LoadMusic()) {
         std::cout << "Failed to load music" << std::endl;
     }
-    background_music = giai_dieu_to_quoc;
+    background_music = wii_music;
+    Mix_PlayMusic(wii_music, -1);
 }
 
 void MainLoop::render_game() {
@@ -70,6 +72,7 @@ void MainLoop::render_game() {
             cat.render(camera, frame);
             resume_button->render(mouseX, mouseY);
             menu_button->render(mouseX, mouseY);
+            retry_button_0->render(mouseX, mouseY);
             break;
         case GAME_OVER:
             bg.render_wallpaper();
@@ -120,6 +123,7 @@ void MainLoop::handle_event(SDL_Event e) {
                 break;
             case CHOOSING_LEVEL:
                 if(e.type == SDL_MOUSEBUTTONDOWN) {
+                    Mix_HaltMusic();
                     int x, y;
                     SDL_GetMouseState(&x, &y);
                     if(level1_button->is_pressed(x, y)) {
@@ -150,7 +154,6 @@ void MainLoop::handle_event(SDL_Event e) {
                 }
                 break;
             case GAME_OVER:
-                Mix_HaltMusic();
                 if(e.type == SDL_MOUSEBUTTONDOWN) {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
@@ -178,10 +181,12 @@ void MainLoop::handle_event(SDL_Event e) {
                     if(menu_button->is_pressed(x, y)) {
                         update_game_state(RESTARTING);
                     }
+                    if(retry_button_0->is_pressed(x, y)) {
+                        update_game_state(RETRYING);
+                    }
                 }
                 break;
             case WIN:
-                Mix_HaltMusic();
                 if(e.type == SDL_MOUSEBUTTONDOWN) {
                     int x, y;
                     SDL_GetMouseState(&x, &y);
@@ -213,7 +218,7 @@ void MainLoop::handle_event(SDL_Event e) {
                         update_game_state(STARTING_SCREEN);
                     }
                     if(no_music_button->is_pressed(x, y)) {
-                        background_music = NULL;
+                        background_music = wii_music;
                         update_game_state(STARTING_SCREEN);
                     }
                 }
@@ -226,13 +231,17 @@ void MainLoop::handle_event(SDL_Event e) {
         cat.move(map->get_tile_set(), *map);
         cat.setCamera(camera, *map);
         if(cat.is_game_over(camera)) {
+            Mix_HaltMusic();
             Mix_PlayChannel(-1, game_over_sound, 0);
             update_game_state(GAME_OVER);
         }
-        if(cat.win(*map)) update_game_state(WIN);
+        if(cat.win(*map)) {
+            Mix_HaltMusic();
+            Mix_PlayChannel(-1, win_sound, 0);
+            update_game_state(WIN);
+        }
     }
     if(game_state == RESTARTING) {
-        std::cout << "Restarting" << std::endl;
         camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
         cat.init();
         update_game_state(STARTING_SCREEN);
@@ -240,6 +249,7 @@ void MainLoop::handle_event(SDL_Event e) {
     if(game_state == RETRYING) {
         camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
         cat.init();
+        Mix_PlayMusic(background_music, -1);
         update_game_state(PLAYING_THE_GAME);
     }
 }

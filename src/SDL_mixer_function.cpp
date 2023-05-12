@@ -9,10 +9,12 @@ Mix_Music* background_music = NULL;
 Mix_Music* giai_dieu_to_quoc = NULL;
 Mix_Music* dat_nuoc_tron_niem_vui = NULL;
 Mix_Music* hanh_khuc_ngay_va_dem = NULL;
+Mix_Music* wii_music = NULL;
 
 Mix_Chunk* button_select_sound = NULL;
 Mix_Chunk* jump_sound = NULL;
 Mix_Chunk* game_over_sound = NULL;
+Mix_Chunk* win_sound = NULL;
 
 bool LoadMusic()
 {
@@ -32,6 +34,11 @@ bool LoadMusic()
 		cout << "Failed to load Giai dieu to quoc. " << Mix_GetError() << endl;
 		success = false;
 	}
+	wii_music = Mix_LoadMUS("res/sounds/wii_music.mp3");
+	if(wii_music == NULL) {
+		cout << "Failed to load wiiiiiii. " << Mix_GetError() << endl;
+		success = false;
+	}
 	button_select_sound = Mix_LoadWAV("res/sounds/button_pressed.wav");
 	if (button_select_sound == NULL)
 	{
@@ -48,6 +55,7 @@ bool LoadMusic()
 		cout << "Failed to load game over sound! Error: " << Mix_GetError() << endl;
 		success = false;
 	}
+	win_sound = Mix_LoadWAV("res/sounds/win.mp3");
 	return success;
 }
 void CloseMusic()

@@ -44,7 +44,6 @@ private:
     vector<Tile*> tile_set;
     SDL_Rect tile_clips[TOTAL_TILE_SPRITES];
     int level;
-    Fish fish;
 public:
     int LEVEL_WIDTH;
     int LEVEL_HEIGHT;
