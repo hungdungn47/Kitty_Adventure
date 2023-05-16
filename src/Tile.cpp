@@ -62,7 +62,7 @@ Map::Map(int _level) {
     level = _level;
     switch(level) {
         case 1:
-            set_tiles("res/Tile_map/Mossy_level.csv");
+            set_tiles("res/Tile_map/Level_1.csv");
             break;
         case 2:
             set_tiles("res/Tile_map/Level_2.csv");

@@ -9,7 +9,7 @@ void Player::init() {
     mVelX = PLAYER_VEL;
     mVelY = 0;
 
-    acceleration = 2;
+    acceleration = abs(acceleration);
 
     player_state = IDLE;
     player_orientation = NORMAL;
@@ -151,7 +151,6 @@ void Player::start_moving() {
 }
 
 void Player::stop_moving() {
-    mVelY -= acceleration;
     mVelX = 0;
 }
 

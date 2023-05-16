@@ -67,7 +67,7 @@ private:
 
     int mVelX, mVelY;
 
-    int acceleration = 2;
+    int acceleration = 1;
 
     LTexture idle_texture;
     LTexture running_texture;

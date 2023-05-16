@@ -9,11 +9,13 @@ class Background {
 private:
     LTexture background_texture;
     LTexture wallpaper_texture;
-    SDL_Rect background_rect;
+    LTexture instruction_texture;
+    SDL_Rect background_rect, instruction_rect;
 public:
     Background();
     ~Background();
     void load_texture();
     void render();
     void render_wallpaper();
+    void render_instruction();
 };

@@ -15,9 +15,11 @@ MainLoop::MainLoop() {
     you_lost = new Textbox(BLACK_COLOR, "Oops!!! You lost", 0, 70, 50, karmatic_arcade_font);
     choose_sound_track = new Textbox(BLACK_COLOR, "Choose background music", 0, 70, 50, karmatic_arcade_font);
 
-    play_button = new Button("Play   ", 700, 300);
-    option_button = new Button("Option", 700, 450);
-    quit_button_0 = new Button("Quit   ", 700, 600);
+    play_button = new Button("Play   ", 700, 250);
+    option_button = new Button("Option", 700, 400);
+    instruction_button = new Button("Instruction", 700, 550);
+    quit_button_0 = new Button("Quit   ", 700, 700);
+    back_button = new Button("Back", 50, 50);
 
     resume_button = new Button("Resume", 450, 400);
     menu_button = new Button(" Menu ", 330, 550);
@@ -53,8 +55,13 @@ void MainLoop::render_game() {
             bg.render_wallpaper();
             play_button->render(mouseX, mouseY);
             option_button->render(mouseX, mouseY);
+            instruction_button->render(mouseX, mouseY);
             quit_button_0->render(mouseX, mouseY);
             title->render_center();
+            break;
+        case INSTRUCTION:
+            bg.render_instruction();
+            back_button->render(mouseX, mouseY);
             break;
         case CHOOSING_LEVEL:
             bg.render_wallpaper();
@@ -116,11 +123,22 @@ void MainLoop::handle_event(SDL_Event e) {
                     if(option_button->is_pressed(x, y)) {
                         update_game_state(CHOOSING_SOUND_TRACK);
                     }
+                    if(instruction_button->is_pressed(x, y)) {
+                        update_game_state(INSTRUCTION);
+                    }
                     if(quit_button_0->is_pressed(x, y) ) {
                         update_game_state(QUITTING_THE_GAME);
                     }
                 }
                 break;
+            case INSTRUCTION: 
+                if(e.type == SDL_MOUSEBUTTONDOWN) {
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+                    if(back_button->is_pressed(x, y)) {
+                        update_game_state(STARTING_SCREEN);
+                    }
+                }
             case CHOOSING_LEVEL:
                 if(e.type == SDL_MOUSEBUTTONDOWN) {
                     Mix_HaltMusic();

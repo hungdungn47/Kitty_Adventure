@@ -18,6 +18,7 @@ const SDL_Color DEEP_GREEN_COLOR = {0, 26, 0};
 
 enum GameState {
     STARTING_SCREEN,
+    INSTRUCTION,
     PLAYING_THE_GAME,
     QUITTING_THE_GAME,
     WIN,

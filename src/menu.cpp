@@ -41,8 +41,8 @@ void Textbox::render_center() {
 Button::Button(std::string _button_name, int x, int y) { 
     button_name = _button_name;
 
-    button_textbox = new Textbox(BLACK_COLOR, button_name, x, y, 30, back_to_1982_font);
-    hovering_textbox = new Textbox(GREEN_COLOR, button_name, x, y, 30, back_to_1982_font);
+    button_textbox = new Textbox(WHITE_COLOR, button_name, x, y, 40, arcade_classic_font);
+    hovering_textbox = new Textbox(GREEN_COLOR, button_name, x, y, 40, arcade_classic_font);
 
     text_rect = button_textbox->get_rect();
     button_rect = {text_rect.x - 30, text_rect.y - 30, text_rect.w + 60, text_rect.h + 60};
@@ -68,10 +68,10 @@ void Button::load_texture() {
 
 void Button::render(int mouseX, int mouseY) {
     if(is_mouse_over(mouseX, mouseY)) {
-        button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
+        //button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
         hovering_textbox->render_text_box();
     } else {
-        button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
+        //button_texture.render(gRenderer, button_rect.x, button_rect.y, NULL, &button_rect);
         button_textbox->render_text_box();
     }
 }
