@@ -1,6 +1,6 @@
 # Welcome to Kitty's adventure
 ## 🐱Overview
-This is a simple 2D game in which you become this cute `kitty`:   
+This is a simple 2D game in which you become this cute `kitty`     
 <img src="res/images/Cat.png" alt="Kitty image" style="height: 100px; width:100px;"/>    
 🎇The idea of the game is very simple. 
 
@@ -29,19 +29,19 @@ Press the `space bar` to reverse the direction of gravity, so that the kitty fal
 Press `Esc` if you wanna pause the game.
 
 ## 📷How does the game look
-This is the main menu screen:   
+This is the main menu screen   
 <img src="res/images/readme_image/main_menu.png" alt="Main menu" style="height: 400px;"/>
 
-Click `Options` to choose the background music:   
+Click `Options` to choose the background music      
 <img src="res/images/readme_image/options.png" alt="Options" style = "height: 400px;"/>
 
-After clicking `Play`, you can choose among 3 levels:   
+After clicking `Play`, you can choose among 3 levels    
 <img src="res/images/readme_image/choose_level.png" alt="Choose level" style = "height: 400px;"/>
 
-When you choose level, the game should start right away:   
+When you choose level, the game should start right away    
 <img src="res/images/readme_image/playing.png" alt="Playing game" style = "height: 400px;"/>
 
-You can pause the game by pressing `Esc`:   
+You can pause the game by pressing `Esc`     
 <img src="res/images/readme_image/pause.png" alt="Pausing" style = "height: 400px;"/>
 
 ## 😽Gratitude
