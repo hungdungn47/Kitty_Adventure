@@ -1,6 +1,6 @@
 # Kitty's adventure
 ## Overview
-This is a small 2D game in which you become a cute `kitty`. \
+This is a small 2D game in which you become this cute `kitty`. [!Kitty image](res/images/Cat.png) \
 The idea of the game is very simple. \
 Your mission is to run continuously and pass the obstacles as fast as possible so that the kitty stays on the screen, until it reaches the end of the map.
 ## Language used
