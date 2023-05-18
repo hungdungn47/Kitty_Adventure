@@ -42,7 +42,6 @@ MainLoop::MainLoop() {
         std::cout << "Failed to load music" << std::endl;
     }
     background_music = wii_music;
-    Mix_PlayMusic(wii_music, -1);
 }
 
 void MainLoop::render_game() {
