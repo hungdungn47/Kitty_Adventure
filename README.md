@@ -1,17 +1,24 @@
-# Kitty's adventure
-## Overview
-This is a small 2D game in which you become this cute `kitty`. [!Kitty image](res/images/Cat.png) \
-The idea of the game is very simple. \
+# Welcome to Kitty's adventure
+## 🐱Overview
+This is a simple 2D game in which you become this cute `kitty`:   
+<img src="res/images/Cat.png" alt="Kitty image" style="height: 100px; width:100px;"/>    
+🎇The idea of the game is very simple. 
+
 Your mission is to run continuously and pass the obstacles as fast as possible so that the kitty stays on the screen, until it reaches the end of the map.
-## Language used
+
+## 💻Technology
 This game is made with `C++` and `SDL2` graphics library. 
-## How to install
+
+## 🔧How to install
 I have included all the necessary files in the project. So you only have to: 
-1. Clone this repository.
-2. Run `main.exe`.
+
+1. Download this repository  
+ <img src="res/images/readme_image/download_zip.png" alt="Download zip file" style="height: 100px; width:100px;"/>  
+3. Run `main.exe`
 
 Now enjoy the game !!!
-## How to play
+
+## 🎮How to play
 This is a one-button game. Press the `space bar` to reverse the direction of gravity, so that the kitty falls in opposite direction.\
 Press `Esc` if you wanna pause the game.
 ## An interesting feature
