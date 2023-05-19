@@ -65,10 +65,10 @@ Map::Map(int _level) {
             set_tiles("res/Tile_map/Level_1.csv");
             break;
         case 2:
-            set_tiles("res/Tile_map/Level_2.csv");
+            set_tiles("res/Tile_map/Level_3.csv");
             break;
         case 3:
-            set_tiles("res/Tile_map/Level_3.csv");
+            set_tiles("res/Tile_map/Level_2.csv");
             break;
         default: break;
     }
